@@ -9,6 +9,7 @@ class returnObj {
 //input should be the string from the POST request
 function parseJson(input) {
     let result = new returnObj();
+    let returnString = '';
 
     try {
         let parsedJSON = JSON.parse(input);
@@ -22,8 +23,13 @@ function parseJson(input) {
         //process this then return
         result.status = 400;
 
-        //need a proper response JSON here in format { "error": "Could not decode request: <error here>" }
+        returnString = '{ "error": "Could not decode request: ' + error.message + '"';
     }
+
+    result.returnJSON = JSON.stringify(returnString);
 
     return result;
 }
+
+module.exports.returnObj = returnObj;
+module.exports.parseJson = parseJson;
