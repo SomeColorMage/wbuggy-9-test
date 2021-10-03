@@ -8,7 +8,7 @@ To install locally:
 
     npm install
 
-This program is a server application and just needs to be deployed anywhere that it can listen on port 80. Test deployment was done via [Heroku](https://www.heroku.com/home).
+This program is a server application and just needs to be deployed anywhere that it can listen to the correct port. Test deployment was done via [Heroku](https://www.heroku.com/home).
 
 To operate, submit a POST request to the server.
 
@@ -18,7 +18,7 @@ To run tests:
 
 ## Components
 ### index.js
-Contains the server code. Sets up a listener to port 80, which will relay requests to the JSON parser, and then respond based on the return value from the parser.
+Contains the server code. Sets up a listener on the port set by Heroku (defaults to 80 if not provided), which will relay requests to the JSON parser, and then respond based on the return value from the parser.
 
 ### code/parser.js
 Contains the JSON parser.

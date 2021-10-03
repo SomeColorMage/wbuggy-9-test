@@ -38,4 +38,4 @@ http.createServer((request, response) => {
 		response.write(JSON.stringify(errorObj));
 		response.end();
 	}
-}).listen(80);
+}).listen(process.env.PORT || 80);
