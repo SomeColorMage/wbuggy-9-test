@@ -1,17 +1,26 @@
-//there's two elements to this... the return must indicate if the parse passed or failed, and it must contain the new JSON string to send back
+/**
+ * @property {Number} status HTTP status code that should be returned to the client (within the scope of this project, should be either 200 OK or 400 Bad Request)
+ * @property {String} returnJSON JSON formatted string that will be returned to the client
+ */
 class returnObj {
 	constructor() {
 		this.status = 200;
-		this.returnJSON = undefined;
+		this.returnJSON = '';
 	}
 }
 
-//input should be the string from the POST request
+/**
+ * Parses a JSON formatted string and looks for data that matches the requirements
+ * 
+ * @param {String} input as the JSON parsing is done within the func, this requires a string input instead of a JSON object
+ * @returns {returnObj}
+ */
 function parseJson(input) {
 	let result = new returnObj();
 	let retObj = new Object();
 
 	try {
+		//check to make sure we have a string, and not something else
 		if(typeof(input) != 'string')
 			throw new Error('Input format is invalid');
 
@@ -41,13 +50,12 @@ function parseJson(input) {
 			});
 		}
 	} catch (error) {
-		console.log(error.message);
-		//process this then return
+		//set return HTTP code to 400 and create a JSON error object
 		result.status = 400;
-
 		retObj.error = "Could not decode request: " + error.message;
 	}
 
+	//output the return JSON object as a string
 	result.returnJSON = JSON.stringify(retObj);
 
 	return result;
